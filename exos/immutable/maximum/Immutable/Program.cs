@@ -16,18 +16,19 @@
             // Initialize search
             Player elder = players.First();
             int biggestAge = elder.Age;
+            Dictionary<string, int> elderList = new Dictionary<string, int>();
+            elderList.Add(elder.Name, biggestAge);
 
             // search
             foreach (Player p in players)
             {
-                if (p.Age > biggestAge) // memorize new elder
+                if (p.Age > elderList.Last().Value) // memorize new elder
                 {
-                    elder = p;
-                    biggestAge = p.Age; // for future loops
+                    elderList.Add(p.Name, p.Age);
                 }
             }
 
-            Console.WriteLine($"Le plus agé est {elder.Name} qui a {elder.Age} ans");
+            Console.WriteLine($"Le plus agé est {elderList.Last().Key} qui a {elderList.Last().Value} ans");
 
             Console.ReadKey();
         }
